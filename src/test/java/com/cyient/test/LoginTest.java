@@ -1,17 +1,11 @@
 package com.cyient.test;
 
-import java.util.concurrent.TimeUnit;
+
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.support.ui.Select;
+
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
+
 import org.testng.annotations.Test;
 
 import com.cyient.base.WebDriverWrapper;
@@ -38,24 +32,11 @@ public class LoginTest extends WebDriverWrapper {
 		
 		String actualValue=login.getErrorMessage();
 		Assert.assertEquals(actualValue, expectedValue);
-		
-		
-		//driver.findElement(By.id("authUser")).sendKeys("adminnn");
-	//	driver.findElement(By.id("clearPass")).sendKeys("pass");
-        
-	//	Select selectLanguage=new Select(driver.findElement(By.name("languageChoice")));
-		//selectLanguage.selectByVisibleText("English (Indian)");
-		
-		//driver.findElement(By.xpath("//button[@class='btn btn-login btn-lg']")).click();
-
-		//String actualValue=driver.findElement(By.xpath("//div[contains(text(),'Invalid')]")).getText();
-		//Assert.assertEquals(actualValue, "Invalid username or password");
-    
 
     }
 	
 	
-	@Test(dataProvider="validData",dataProviderClass=DataProviderUtils.class)
+	@Test(dataProvider="validCredentialExcelData",dataProviderClass=DataProviderUtils.class)
 	public void validCredentialTest(String username, String password, String languageText, String expectedValue) {
 		
 		LoginPage login=new LoginPage(driver);
@@ -66,20 +47,8 @@ public class LoginTest extends WebDriverWrapper {
 		
 		DashboardPage dashboard=new DashboardPage(driver);
 		
-		String actualValue=driver.findElement(By.xpath("//span[contains(text(),'Calendar')]")).getText();
+		String actualValue=driver.getTitle();
 		Assert.assertEquals(actualValue, expectedValue);
-		
-		
-		
-		
-		
-		//driver.findElement(By.xpath("//button[@class='btn btn-login btn-lg']")).click();
-		
-		//Assert.assertEquals(driver.getTitle(),"OpenEMR");
-		
-		//String actualValue=driver.findElement(By.xpath("//span[contains(text(),'Calendar')]")).getText();
-		//Assert.assertEquals(actualValue, "Calendar");
-		
 	}
 	
 	@Test
